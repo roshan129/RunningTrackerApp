@@ -23,11 +23,14 @@ class MainActivity : AppCompatActivity() {
 
         navigateToTrackingFragmentIfNeeded(intent)
 
+        setSupportActionBar(toolbar)
         bottomNavigationView.setupWithNavController(navHostFragment.findNavController())
+        bottomNavigationView.setOnNavigationItemReselectedListener { /* No Operation */ }
+
 
         navHostFragment.findNavController()
-            .addOnDestinationChangedListener{ _, destination, _ ->
-                when(destination.id){
+            .addOnDestinationChangedListener { _, destination, _ ->
+                when (destination.id) {
                     R.id.settingsFragment, R.id.runFragment, R.id.statisticsFragment ->
                         bottomNavigationView.visibility = View.VISIBLE
 
@@ -42,8 +45,8 @@ class MainActivity : AppCompatActivity() {
         navigateToTrackingFragmentIfNeeded(intent)
     }
 
-    private fun navigateToTrackingFragmentIfNeeded(intent: Intent?){
-        if(intent?.action == ACTION_SHOW_TRACKING_FRAGMENT){
+    private fun navigateToTrackingFragmentIfNeeded(intent: Intent?) {
+        if (intent?.action == ACTION_SHOW_TRACKING_FRAGMENT) {
             navHostFragment.findNavController().navigate(R.id.action_global_trackingFragment)
         }
     }
